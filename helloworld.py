@@ -38,6 +38,45 @@ my_dict = {
 my_dict["appended"] = 99
 my_dict[0] = 8
 print (my_dict)
+print (my_dict.items())
+
+print (my_dict.keys(), "\n", my_dict.values())
+
+# Example:
+l1 = [1,2,3,4,5]
+l2 = [i**2 for i in l1]
+print (f"Example {l2} this")
+
+# ** noname function
+my_func = lambda x, y: (x,y,x**y)
+print (f"{my_func(2, 3)}")
+l3 = [(lambda x: x*2)(i) for i in l1]
+print (l3)
 
 
+# ** nammed function
+def new_func(val_in: int) -> bool:
+    r = val_in < 10
+    return r
 
+def new_func2(val_in: int) -> bool:
+    if val_in < 10:
+        return True
+    elif val_in == 10:
+        return True
+    else:
+        return False
+
+print (new_func2(8))
+
+def new_func3(val_in: int) -> bool:
+    i = 0
+    while i<5:
+        i+=1
+        print (i)
+    for i in range(10,15):
+        print (i)
+    return True
+
+
+new_func3(0)

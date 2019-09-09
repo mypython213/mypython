@@ -1,18 +1,32 @@
-class Car:
-    wheel_count = 4
-    speed = 0
+class Plane:
+    nam = ''
+    engine = 0
+    in_air = False
 
     def __init__(self, name):
         self.name = name
-    @classmethod
-    def launch(cls, speed):
-        cls.speed = speed
-    def turbo(self, speed):
-        if speed > 100:
-            self.wheel_count +=2
 
-car = Car("Lada")
-car.launch(1000)
-car.turbo(1000)
-print (car.wheel_count)
-print (Car.wheel_count)
+    def launch(self):
+        self.in_air = True
+        print("Launch")
+
+    def fall(self):
+        self.in_air = False
+        print("Landing")
+        self.engine -= 1
+
+    @classmethod
+    def add_wings(cls, count):
+        cls.engine += count
+
+    def get_engine_number(self):
+        return self.engine
+
+car = Plane("Lada")
+car.launch()
+car.add_wings(10)
+print (car.get_engine_number())
+car.add_wings(10)
+car.fall()
+print (car.get_engine_number())
+

@@ -3,12 +3,13 @@ from datetime import date
 
 class User:
     nam = ''
-    birthday = 0;
+    birthday = 0
     friends = []
 
     def __init__(self, name, birthday):
         self.nam = name
         self.birthday = birthday
+        self.friends = []
 
     def get_friends(self):
         r = [i.nam for i in self.friends]
@@ -47,3 +48,4 @@ VPythone = Network()
 VPythone.init()
 print (VPythone.users[0].get_friends())
 print (f"Возраст второго {VPythone.users[1].get_age() }")
+print ("Количество друзей первого ", len( VPythone.users[0].get_friends()))

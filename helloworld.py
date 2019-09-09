@@ -68,3 +68,15 @@ def new_func2(val_in: int) -> bool:
         return False
 
 print (new_func2(8))
+
+def new_func3(val_in: int) -> bool:
+    i = 0
+    while i<5:
+        i+=1
+        print (i)
+    for i in range(10,15):
+        print (i)
+    return True
+
+
+new_func3(0)

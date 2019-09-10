@@ -20,6 +20,8 @@ class User (Sugar1):
     birthday = 0
     friends = []
 
+    def __str__(self):
+        return self.nam
     def __init__(self, name, birthday):
         self.nam = name
         self.birthday = birthday
@@ -36,6 +38,11 @@ class User (Sugar1):
     def add_friend(self, new):
         return self.friends.append(new)
 
+    def __len__(self):
+        return len (self.friends)
+
+    def __le__(self, other):
+        return len (self.friends) <= len (other.friends)
 
 class Author(User):
     posts = []
@@ -78,10 +85,29 @@ class Network:
         self.users[0].add_friend(self.users[1])
         self.users[0].add_friend(self.users[2])
         # V2 = User("Anonim214", datetime.date(2006, 5, 1))
+    def __getitem__(self, item):
+        for i in self.users:
+            if i.nam == item:
+                return i
+                break
+        return None
+
+    def __gt__(self, other):
+        return self.users.nam > other.users.nam
+
 
 
 VPythone = Network()
 VPythone.init()
+
+t = VPythone['Anonim1']
+print(f"Найден пользователь {t} (друзей {len (t)}) ")
+print(f"Отношние первых двух: {VPythone.users[0]<=VPythone.users[1]}")
+
+
 print (VPythone.users[0].get_friends())
 print (f"Возраст второго {VPythone.users[1].get_age() }")
 print ("Количество друзей первого ", len( VPythone.users[0].get_friends()))
+
+# print(VPythone.users[0])
+# print(VPythone.users[0])

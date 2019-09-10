@@ -1,7 +1,21 @@
 import datetime
 from datetime import date
 
-class User:
+def if_line(cond,V1,V2):
+    if cond:
+        return V1
+    return V2
+
+class Sugar1:
+    avatar = ""
+    premium = False
+    def set_avatar(self, url:str):
+        self.avatar = url
+    def active_prem(self):
+        self.premium = self.premium ^ True
+        print(if_line(self.premium, "Premium access activated", "Premium access disactivated"))
+
+class User (Sugar1):
     nam = ''
     birthday = 0
     friends = []
@@ -23,13 +37,33 @@ class User:
         return self.friends.append(new)
 
 
+class Author(User):
+    posts = []
+    def add_post(self, content:str="Empty line"):
+        self.posts.append(content)
+    def remove_post(self, id:int=-1):
+        self.posts.pop(id)
 # **
-V1 = User("Anonim1", datetime.date(2016,5,30))
+V1 = Author("Anonim1", datetime.date(2016,5,30))
 V2 = User("Anonim214", datetime.date(2006,5,1))
 print(f"Возраст ", V1.get_age())
 print(f"Список друзей одинокого пользователя {V1.nam}: {V1.get_friends()}" )
 V1.add_friend(V2)
 print(f"Список друзей пользователя {V1.nam} после добавления одного друга: {V1.get_friends()}" )
+
+V1.active_prem()
+V1.active_prem()
+V1.active_prem()
+V1.set_avatar('error')
+
+print(f"Список постов {V1.nam} изначально: {V1.posts}" )
+V1.add_post()
+V1.add_post("How add post?")
+V1.add_post("I'm super admin!")
+print(f"Список постов {V1.nam} после добавления: {V1.posts}" )
+
+V1.remove_post(1)
+print(f"Список постов {V1.nam} конечно: {V1.posts}" )
 
 
 class Network:

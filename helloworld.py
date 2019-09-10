@@ -80,3 +80,8 @@ def new_func3(val_in: int) -> bool:
 
 
 new_func3(0)
+
+
+def new_func4(self, *args):
+     r = args[0]
+     p = args[1]

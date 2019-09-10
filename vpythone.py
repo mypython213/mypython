@@ -64,6 +64,8 @@ print(f"Список постов {V1.nam} после добавления: {V1.
 
 V1.remove_post(1)
 print(f"Список постов {V1.nam} конечно: {V1.posts}" )
+V1.remove_post()
+print(f"Список постов {V1.nam} совсем конечно: {V1.posts}" )
 
 
 class Network:

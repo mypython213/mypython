@@ -4,6 +4,7 @@ import csv
 import networkx as nx
 import matplotlib.pyplot as plt
 
+from peewee import SqliteDatabase, Model, CharField, DateField, BooleanField, ForeignKeyField
 
 from datetime import date
 
@@ -20,6 +21,20 @@ class Sugar1:
     def active_prem(self):
         self.premium = self.premium ^ True
         print(if_line(self.premium, "Premium access activated", "Premium access disactivated"))
+
+db = SqliteDatabase('VPythone.db')
+
+class db_User(Model):
+    name: CharField()
+    birthday: DateField()
+    class Meta:
+        database = db
+
+class db_Friend(Model):
+    name1 = ForeignKeyField(db_User, related_name='pets')
+    name2: CharField()
+    class Meta:
+        database = db
 
 class User (Sugar1):
     nam = ''
@@ -90,6 +105,7 @@ class Network:
     def __init__(self):
         self.G = nx.Graph()
 
+
     def init(self):
         self.users.append( User("Anonim1", datetime.date(2016, 5, 30)) )
         self.users.append( User("Anonim2", datetime.date(1686, 1, 1)) )
@@ -104,6 +120,18 @@ class Network:
                 return i
                 break
         return None
+
+    def Save_to_db(self):
+        db_User.create_table()
+        db_Friend.create_table()
+
+        for i in self.G.node:
+            db_User.create(name=self.G.node[i]['user'].nam, birthday=date(2000,1,1))
+
+            fr =list (nx.neighbors(self.G, i))
+            for j in fr:
+                db_Friend.create(name1=i, name2=j)
+
 
     def __gt__(self, other):
         return self.users.nam > other.users.nam
@@ -179,6 +207,7 @@ VPythone.add_friend("Adam", "Anonim2")
 
 
 # VPythone.add_friend('Anonim1', 'Anonim2')
+VPythone.Save_to_db()
 
 print(VPythone.recomend('FriendManiac'))
 

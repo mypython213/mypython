@@ -81,3 +81,7 @@ plt.show()
 
 print(nx.neighbors('A'))
 print(list(nx.shortest_path(G, 'A')))
+
+
+import os
+print (isinstance('ssss', G))

@@ -71,7 +71,7 @@ G = nx.Graph()
 G.add_node('A', data={"name": "Node A"})
 G.add_node('B')
 G.add_node('C')
-G.add_node('D')
+G.add_node('D')ss
 G.add_edge('A', 'B')
 G.add_edge('A', 'C')
 print(G.nodes)
